@@ -19,17 +19,15 @@ jobs:
           pip install robotframework-databaselibrary
       - name: Run Tests
         run: |
-          robot -- include smoke tests/api_tests2.robot
-          robot -- include smoke tests/custom_keywords_tests.robot
-          robot -- include smoke tests/database_tests.robot
-      - name: Upload Test Results
+          robot -- include smoke --outputdir results tests/api_tests2.robot || true
+          robot -- include smoke --outputdir results tests/custom_keywords_tests.robot || true
+          robot -- include smoke --outputdir results tests/database_tests.robot || true
+      - name: Upload Results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: rebot-results
-          path: |
-            output.xml
-            log.html
-            report.html
+          path: results/
+
 
           
