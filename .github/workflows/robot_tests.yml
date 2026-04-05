@@ -1,6 +1,6 @@
 name: Robot Framework Tests
 on:
-  push:
+  push: 
     branched: [ main ]
   pull_request:
     branches: [ main ]
