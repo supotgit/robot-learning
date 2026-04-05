@@ -8,8 +8,8 @@ jobs:
   test:
     run-on: ubuntu-latest
     steps:
-      - user: actions/checkout@v3
-      - user: actions/setup-python@v4
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
         with:
           python-version: '3.9'
       - name: Install dependencies
@@ -24,7 +24,7 @@ jobs:
           robot -- include smoke tests/database_tests.robot
       - name: Upload Test Results
         if: always()
-        user: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3
         with:
           name: rebot-results
           path: |
