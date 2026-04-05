@@ -1,14 +1,12 @@
 name: Robot Framework Tests
 on:
-  push: 
-    branched: [ main ]
-  pull_request:
+  push:
     branches: [ main ]
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/upload-artifact@v4
+      - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.9'
@@ -17,17 +15,18 @@ jobs:
           pip install robotframework
           pip install robotframework-requests
           pip install robotframework-databaselibrary
+      - name: Create results folder
+        run: mkdir -p results
       - name: Run Tests
         run: |
-          robot -- include smoke --outputdir results tests/api_tests2.robot || true
-          robot -- include smoke --outputdir results tests/custom_keywords_tests.robot || true
-          robot -- include smoke --outputdir results tests/database_tests.robot || true
+          robot --include smoke --outputdir results tests/api_tests2.robot || true
+          robot --include smoke --outputdir results tests/custom_keywords_tests.robot || true
+          robot --include smoke --outputdir results tests/database_tests.robot || true
       - name: Upload Results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: rebot-results
-          path: results/
-
-
+          name: robot-results
+          path: results
+          if-no-files-found: warn
           
