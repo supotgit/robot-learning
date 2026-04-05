@@ -1,0 +1,43 @@
+name: Robot Framework Tests
+
+on:
+  push:
+    branched: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  robot-tests:
+    run-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      user: actions/checkout@v3
+
+    - name: Setup Python
+      user: actions/setup-python@v4
+      with: 
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        pip install robotframework
+        pip install robotframework-requests
+        pip install robotframework-databaelibrary
+
+    - name: Run Robot Framework Tests
+      run: |
+        robot -- include smoke tests/api_tests2.robot
+        robot -- include smoke tests/custom_keywords_tests.robot
+        robot -- include smoke tests/database_test.robot
+
+    - name: Upload Test Results
+      if: always()
+      user: actions/upload-artifact@v3
+      with:
+        name: rebot-Results
+        path: |
+          output.xml
+          log.html
+          report.html
+          
