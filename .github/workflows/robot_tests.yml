@@ -8,34 +8,33 @@ on:
 
 jobs:
   robot-tests:
-    run-on: ubuntu-latest
-
+    run-on:    ubuntu-latest
     steps:
-    - name: Checkout code
+    - name:      Checkout code
       user: actions/checkout@v3
 
-    - name: Setup Python
+    - name:      Setup Python
       user: actions/setup-python@v4
       with: 
         python-version: '3.9'
 
-    - name: Install dependencies
+    - name:      Install dependencies
       run: |
         pip install robotframework
         pip install robotframework-requests
-        pip install robotframework-databaelibrary
+        pip install robotframework-databaselibrary
 
-    - name: Run Robot Framework Tests
+    - name:      Run Robot Tests
       run: |
         robot -- include smoke tests/api_tests2.robot
         robot -- include smoke tests/custom_keywords_tests.robot
-        robot -- include smoke tests/database_test.robot
+        robot -- include smoke tests/database_tests.robot
 
-    - name: Upload Test Results
+    - name:      Upload Test Results
       if: always()
       user: actions/upload-artifact@v3
       with:
-        name: rebot-Results
+        name: rebot-results
         path: |
           output.xml
           log.html
