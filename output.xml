@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.2 (Python 3.9.6 on win32)" generated="2026-04-02T18:18:50.945838" rpa="false" schemaversion="5">
+<suite id="s1" name="Database Tests" source="C:\robot_learning\tests\database_tests.robot">
+<test id="s1-t1" name="เชื่อมต่อ DataBase สำเร็จ" line="9">
+<kw name="Connect To Database" owner="DatabaseLibrary">
+<msg time="2026-04-02T18:18:51.043747" level="INFO">Looking for configuration file: 'resources\db.cfg'</msg>
+<msg time="2026-04-02T18:18:51.043747" level="INFO">Configuration file doesn't exist</msg>
+<msg time="2026-04-02T18:18:51.051488" level="INFO">Connect to DB using : sqlite3.connect(database='C:/robot_learning/test_db.sqlite')</msg>
+<arg>sqlite3</arg>
+<arg>${DB_FILE}</arg>
+<doc>Creates a database connection using the DB API 2.0 ``db_module`` and the parameters provided.
+Along with listed commonly used arguments (`db_name`, `db_host` etc.)
+you can set any other DB module specific parameters as key/value pairs.</doc>
+<status status="PASS" start="2026-04-02T18:18:51.043747" elapsed="0.007741"/>
+</kw>
+<kw name="Query" owner="DatabaseLibrary">
+<msg time="2026-04-02T18:18:51.051488" level="INFO" html="true">Executing sql:&lt;br&gt;&lt;code style="font-weight: bold;"&gt;Select * FROM users WHERE username='qa_tester'&lt;/code&gt;</msg>
+<msg time="2026-04-02T18:18:51.051488" level="INFO">Commit the transaction</msg>
+<msg time="2026-04-02T18:18:51.051488" level="INFO" html="true">&lt;div style="max-width: 100%; overflow-x: auto; max-height: 500px; overflow-y: auto;"&gt;&lt;table style="width: auto; border-collapse: collapse; border: 2px solid rgb(140 140 140)"&gt;&lt;caption style="text-align: left; font-weight: bold; padding: 5px;"&gt;Query returned 1 rows&lt;/caption&gt;&lt;tr&gt;&lt;th scope="col" style="position: sticky; top: 0; color:black; background-color: #d6ecd4; border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;Row&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;id&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;username&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;email&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;status&lt;/th&gt;&lt;/tr&gt;&lt;tr style="background-color: var(--secondary-color, #eee)"&gt;&lt;th scope="row" style="color:black; background-color: #d6ecd4;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;0&lt;/th&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;1&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;qa_tester&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;qa@example.com&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;active&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</msg>
+<msg time="2026-04-02T18:18:51.051488" level="INFO">${result} = [(1, 'qa_tester', 'qa@example.com', 'active')]</msg>
+<var>${result}</var>
+<arg>Select * FROM users WHERE username='qa_tester'</arg>
+<doc>Runs a query with the ``select_statement`` and returns the result as list of rows.
+The type of row values depends on the database module -
+usually they are tuples or tuple-like objects.</doc>
+<status status="PASS" start="2026-04-02T18:18:51.051488" elapsed="0.000000"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-04-02T18:18:51.051488" level="INFO">Length is 1.</msg>
+<arg>${result}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-04-02T18:18:51.051488" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-02T18:18:51.051488" level="INFO">พบข้อมูล User: [(1, 'qa_tester', 'qa@example.com', 'active')]</msg>
+<arg>พบข้อมูล User: ${result}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-02T18:18:51.051488" elapsed="0.000000"/>
+</kw>
+<kw name="Disconnect From Database" owner="DatabaseLibrary">
+<doc>Disconnects from the database.</doc>
+<status status="PASS" start="2026-04-02T18:18:51.051488" elapsed="0.000000"/>
+</kw>
+<tag>database</tag>
+<tag>smoke</tag>
+<status status="PASS" start="2026-04-02T18:18:51.042747" elapsed="0.008741"/>
+</test>
+<test id="s1-t2" name="ตรวจสอบจำนวน User ทั้งหมด" line="17">
+<kw name="Connect To Database" owner="DatabaseLibrary">
+<msg time="2026-04-02T18:18:51.051488" level="INFO">Looking for configuration file: 'resources\db.cfg'</msg>
+<msg time="2026-04-02T18:18:51.060357" level="INFO">Configuration file doesn't exist</msg>
+<msg time="2026-04-02T18:18:51.060357" level="INFO">Connect to DB using : sqlite3.connect(database='C:/robot_learning/test_db.sqlite')</msg>
+<arg>sqlite3</arg>
+<arg>${DB_FILE}</arg>
+<doc>Creates a database connection using the DB API 2.0 ``db_module`` and the parameters provided.
+Along with listed commonly used arguments (`db_name`, `db_host` etc.)
+you can set any other DB module specific parameters as key/value pairs.</doc>
+<status status="PASS" start="2026-04-02T18:18:51.051488" elapsed="0.009883"/>
+</kw>
+<kw name="Query" owner="DatabaseLibrary">
+<msg time="2026-04-02T18:18:51.061371" level="INFO" html="true">Executing sql:&lt;br&gt;&lt;code style="font-weight: bold;"&gt;SELECT COUNT(*) FROM users&lt;/code&gt;</msg>
+<msg time="2026-04-02T18:18:51.061371" level="INFO">Commit the transaction</msg>
+<msg time="2026-04-02T18:18:51.061371" level="INFO" html="true">&lt;div style="max-width: 100%; overflow-x: auto; max-height: 500px; overflow-y: auto;"&gt;&lt;table style="width: auto; border-collapse: collapse; border: 2px solid rgb(140 140 140)"&gt;&lt;caption style="text-align: left; font-weight: bold; padding: 5px;"&gt;Query returned 1 rows&lt;/caption&gt;&lt;tr&gt;&lt;th scope="col" style="position: sticky; top: 0; color:black; background-color: #d6ecd4; border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;Row&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;COUNT(*)&lt;/th&gt;&lt;/tr&gt;&lt;tr style="background-color: var(--secondary-color, #eee)"&gt;&lt;th scope="row" style="color:black; background-color: #d6ecd4;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;0&lt;/th&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;3&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</msg>
+<msg time="2026-04-02T18:18:51.061371" level="INFO">${result} = [(3,)]</msg>
+<var>${result}</var>
+<arg>SELECT COUNT(*) FROM users</arg>
+<doc>Runs a query with the ``select_statement`` and returns the result as list of rows.
+The type of row values depends on the database module -
+usually they are tuples or tuple-like objects.</doc>
+<status status="PASS" start="2026-04-02T18:18:51.061371" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<msg time="2026-04-02T18:18:51.063365" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result[0][0]}</arg>
+<arg>3</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="PASS" start="2026-04-02T18:18:51.062458" elapsed="0.000907"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-02T18:18:51.063365" level="INFO">จำนวน user ทั้งหมด: 3</msg>
+<arg>จำนวน user ทั้งหมด: ${result[0][0]}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-02T18:18:51.063365" elapsed="0.000000"/>
+</kw>
+<kw name="Disconnect From Database" owner="DatabaseLibrary">
+<doc>Disconnects from the database.</doc>
+<status status="PASS" start="2026-04-02T18:18:51.064366" elapsed="0.000000"/>
+</kw>
+<tag>database</tag>
+<tag>smoke</tag>
+<status status="PASS" start="2026-04-02T18:18:51.051488" elapsed="0.012878"/>
+</test>
+<test id="s1-t3" name="ตรวจอบ User ทีมีสถานะ active" line="25">
+<kw name="Connect To Database" owner="DatabaseLibrary">
+<msg time="2026-04-02T18:18:51.066821" level="INFO">Looking for configuration file: 'resources\db.cfg'</msg>
+<msg time="2026-04-02T18:18:51.066821" level="INFO">Configuration file doesn't exist</msg>
+<msg time="2026-04-02T18:18:51.066821" level="INFO">Connect to DB using : sqlite3.connect(database='C:/robot_learning/test_db.sqlite')</msg>
+<arg>sqlite3</arg>
+<arg>${DB_FILE}</arg>
+<doc>Creates a database connection using the DB API 2.0 ``db_module`` and the parameters provided.
+Along with listed commonly used arguments (`db_name`, `db_host` etc.)
+you can set any other DB module specific parameters as key/value pairs.</doc>
+<status status="PASS" start="2026-04-02T18:18:51.065364" elapsed="0.002594"/>
+</kw>
+<kw name="Query" owner="DatabaseLibrary">
+<msg time="2026-04-02T18:18:51.070339" level="INFO" html="true">Executing sql:&lt;br&gt;&lt;code style="font-weight: bold;"&gt;SELECT * FROM users WHERE status='active'&lt;/code&gt;</msg>
+<msg time="2026-04-02T18:18:51.071132" level="INFO">Commit the transaction</msg>
+<msg time="2026-04-02T18:18:51.071132" level="INFO" html="true">&lt;div style="max-width: 100%; overflow-x: auto; max-height: 500px; overflow-y: auto;"&gt;&lt;table style="width: auto; border-collapse: collapse; border: 2px solid rgb(140 140 140)"&gt;&lt;caption style="text-align: left; font-weight: bold; padding: 5px;"&gt;Query returned 2 rows&lt;/caption&gt;&lt;tr&gt;&lt;th scope="col" style="position: sticky; top: 0; color:black; background-color: #d6ecd4; border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;Row&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;id&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;username&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;email&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;status&lt;/th&gt;&lt;/tr&gt;&lt;tr style="background-color: var(--secondary-color, #eee)"&gt;&lt;th scope="row" style="color:black; background-color: #d6ecd4;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;0&lt;/th&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;1&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;qa_tester&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;qa@example.com&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;active&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th scope="row" style="color:black; background-color: #d6ecd4;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;1&lt;/th&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;2&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;admin&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;admin@example.com&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;active&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</msg>
+<msg time="2026-04-02T18:18:51.071132" level="INFO">${result} = [(1, 'qa_tester', 'qa@example.com', 'active'), (2, 'admin', 'admin@example.com', 'active')]</msg>
+<var>${result}</var>
+<arg>SELECT * FROM users WHERE status='active'</arg>
+<doc>Runs a query with the ``select_statement`` and returns the result as list of rows.
+The type of row values depends on the database module -
+usually they are tuples or tuple-like objects.</doc>
+<status status="PASS" start="2026-04-02T18:18:51.067958" elapsed="0.003174"/>
+</kw>
+<kw name="Length Should Be" owner="BuiltIn">
+<msg time="2026-04-02T18:18:51.072140" level="INFO">Length is 2.</msg>
+<arg>${result}</arg>
+<arg>2</arg>
+<doc>Verifies that the length of the given item is correct.</doc>
+<status status="PASS" start="2026-04-02T18:18:51.072140" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-02T18:18:51.073142" level="INFO">พบ User ที่ Active: [(1, 'qa_tester', 'qa@example.com', 'active'), (2, 'admin', 'admin@example.com', 'active')]</msg>
+<arg>พบ User ที่ Active: ${result}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-02T18:18:51.072140" elapsed="0.001002"/>
+</kw>
+<kw name="Disconnect From Database" owner="DatabaseLibrary">
+<doc>Disconnects from the database.</doc>
+<status status="PASS" start="2026-04-02T18:18:51.073142" elapsed="0.000000"/>
+</kw>
+<tag>database</tag>
+<tag>regression</tag>
+<status status="PASS" start="2026-04-02T18:18:51.065364" elapsed="0.007778"/>
+</test>
+<test id="s1-t4" name="ตรวจอบ User ที่ไม่มีอยู่" line="33">
+<kw name="Connect To Database" owner="DatabaseLibrary">
+<msg time="2026-04-02T18:18:51.074686" level="INFO">Looking for configuration file: 'resources\db.cfg'</msg>
+<msg time="2026-04-02T18:18:51.074686" level="INFO">Configuration file doesn't exist</msg>
+<msg time="2026-04-02T18:18:51.074686" level="INFO">Connect to DB using : sqlite3.connect(database='C:/robot_learning/test_db.sqlite')</msg>
+<arg>sqlite3</arg>
+<arg>${DB_FILE}</arg>
+<doc>Creates a database connection using the DB API 2.0 ``db_module`` and the parameters provided.
+Along with listed commonly used arguments (`db_name`, `db_host` etc.)
+you can set any other DB module specific parameters as key/value pairs.</doc>
+<status status="PASS" start="2026-04-02T18:18:51.074686" elapsed="0.000000"/>
+</kw>
+<kw name="Query" owner="DatabaseLibrary">
+<msg time="2026-04-02T18:18:51.074686" level="INFO" html="true">Executing sql:&lt;br&gt;&lt;code style="font-weight: bold;"&gt;SELECT * FROM users WHERE username='unknown_user'&lt;/code&gt;</msg>
+<msg time="2026-04-02T18:18:51.074686" level="INFO">Commit the transaction</msg>
+<msg time="2026-04-02T18:18:51.074686" level="INFO" html="true">&lt;div style="max-width: 100%; overflow-x: auto; max-height: 500px; overflow-y: auto;"&gt;&lt;table style="width: auto; border-collapse: collapse; border: 2px solid rgb(140 140 140)"&gt;&lt;caption style="text-align: left; font-weight: bold; padding: 5px;"&gt;Query returned 0 rows&lt;/caption&gt;&lt;tr&gt;&lt;th scope="col" style="position: sticky; top: 0; color:black; background-color: #d6ecd4; border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;Row&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;id&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;username&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;email&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;status&lt;/th&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</msg>
+<msg time="2026-04-02T18:18:51.074686" level="INFO">${result} = []</msg>
+<var>${result}</var>
+<arg>SELECT * FROM users WHERE username='unknown_user'</arg>
+<doc>Runs a query with the ``select_statement`` and returns the result as list of rows.
+The type of row values depends on the database module -
+usually they are tuples or tuple-like objects.</doc>
+<status status="PASS" start="2026-04-02T18:18:51.074686" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Empty" owner="BuiltIn">
+<msg time="2026-04-02T18:18:51.074686" level="INFO">Length is 0.</msg>
+<arg>${result}</arg>
+<doc>Verifies that the given item is empty.</doc>
+<status status="PASS" start="2026-04-02T18:18:51.074686" elapsed="0.004574"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-02T18:18:51.079260" level="INFO">ไม่พบ User ที่ไม่มีอยู่จริง:</msg>
+<arg>ไม่พบ User ที่ไม่มีอยู่จริง:</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-02T18:18:51.079260" elapsed="0.000000"/>
+</kw>
+<kw name="Disconnect From Database" owner="DatabaseLibrary">
+<doc>Disconnects from the database.</doc>
+<status status="PASS" start="2026-04-02T18:18:51.079260" elapsed="0.000000"/>
+</kw>
+<tag>database</tag>
+<tag>regression</tag>
+<status status="PASS" start="2026-04-02T18:18:51.074139" elapsed="0.005121"/>
+</test>
+<status status="PASS" start="2026-04-02T18:18:50.949870" elapsed="0.130739"/>
+</suite>
+<statistics>
+<total>
+<stat pass="4" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="4" fail="0" skip="0">database</stat>
+<stat pass="2" fail="0" skip="0">regression</stat>
+<stat pass="2" fail="0" skip="0">smoke</stat>
+</tag>
+<suite>
+<stat name="Database Tests" id="s1" pass="4" fail="0" skip="0">Database Tests</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
